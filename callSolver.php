@@ -9,7 +9,7 @@ $data = json_encode($myObj);
 $ch = curl_init();
 
 curl_setopt($ch, CURLOPT_URL,"http://cicero.cs.cf.ac.uk/jArgSemSATWeb/restapi/argtech/");
-curl_setopt($ch, CURLOPT_PROXY, '10.0.2.200:1280');
+curl_setopt($ch, CURLOPT_PROXY, '10.0.2.200:3128');
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
