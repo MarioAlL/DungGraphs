@@ -21,14 +21,14 @@ $(document).ready(function() {
       hover: true
     },
     manipulation: {
-      addNode: function(nodeData, callback){
+      addNode: function(nodeData, callback) {
         $("#nodeLabel").focus();
         nodeData.id = $("#nodeLabel").val();
         nodeData.label = $("#nodeLabel").val();
         $("#nodeLabel").val("");
         callback(nodeData);
       },
-      addEdge: function(edgeData, callback){
+      addEdge: function(edgeData, callback) {
         edgeData.arrows = "to";
         callback(edgeData);
       }
@@ -37,46 +37,46 @@ $(document).ready(function() {
 
   network = new vis.Network(container, data, options);
   dataForExtensions = data;
-  
 
-$("#semantics").change(function(){
-  showPleaseWait();
-  var jsonNodos = network.body.data.nodes._data;
-  var jsonRelaciones = network.body.data.edges._data;
 
-  var nodos = [];
-  var ataques = [];
+  $("#semantics").change(function() {
+    showPleaseWait();
+    var jsonNodos = network.body.data.nodes._data;
+    var jsonRelaciones = network.body.data.edges._data;
 
-  var dataNodos = [];
-  var dataEdges = [];
-  
-  $.each(jsonNodos, function(key, value){
-    nodos.push(key);
-    dataNodos.push({
-      'id':key,
-      'label':key
+    var nodos = [];
+    var ataques = [];
+
+    var dataNodos = [];
+    var dataEdges = [];
+
+    $.each(jsonNodos, function(key, value) {
+      nodos.push(key);
+      dataNodos.push({
+        'id': key,
+        'label': key
+      });
     });
-  });
 
-  console.log("Nodos: " + nodos);
+    console.log("Nodos: " + nodos);
 
-  $.each(jsonRelaciones, function(key, value){
-    ataques.push('(' + value.from + "," + value.to + ')');
-    dataEdges.push({
-      'from':value.from,
-      'to':value.to,
-      'arrows':'to'
+    $.each(jsonRelaciones, function(key, value) {
+      ataques.push('(' + value.from + "," + value.to + ')');
+      dataEdges.push({
+        'from': value.from,
+        'to': value.to,
+        'arrows': 'to'
+      });
     });
-  });
 
-  console.log("Ataques: " + ataques);
+    console.log("Ataques: " + ataques);
 
-  //Se grafica el dung donde se mostraran las extensiones
-  graficarDungExtensiones(dataNodos, dataEdges);
-  $("#selectExtensionsResults").html('');
-  
-  /////Call to solver
-  $.ajax({
+    //Se grafica el dung donde se mostraran las extensiones
+    graficarDungExtensiones(dataNodos, dataEdges);
+    $("#selectExtensionsResults").html('');
+
+    /////Call to solver
+    $.ajax({
       url: 'callSolver.php',
       method: 'POST',
       data: {
@@ -85,7 +85,7 @@ $("#semantics").change(function(){
         semantics: $(this).val()
       },
       success: function(data) {
-        
+
         console.log("Extension: " + data);
         result = JSON.parse(data);
 
@@ -99,9 +99,9 @@ $("#semantics").change(function(){
     });
 
 
-});
-/////Change para cada extension
-$('#selectExtensionsResults').change(function() {
+  });
+  /////Change para cada extension
+  $('#selectExtensionsResults').change(function() {
 
     var result = $(this).val();
     console.log(result);
@@ -109,18 +109,18 @@ $('#selectExtensionsResults').change(function() {
     extensiones(result);
   });
 
-function cleanNetwork(){
+  function cleanNetwork() {
 
-  $.each(dataForExtensions.nodes._data, function(key, value){
-    dataForExtensions.nodes.update([{
-      id: key,
-      color: '#97C2FC'
-    }])
-  });
-  
-}
+    $.each(dataForExtensions.nodes._data, function(key, value) {
+      dataForExtensions.nodes.update([{
+        id: key,
+        color: '#97C2FC'
+      }])
+    });
 
-function extensiones(extensiones) {
+  }
+
+  function extensiones(extensiones) {
 
     var nodos = extensiones.split(',');
 
@@ -132,7 +132,7 @@ function extensiones(extensiones) {
     }
   }
 
-function loadExtensionResult(extensiones) {
+  function loadExtensionResult(extensiones) {
 
     for (var i = 0; i < extensiones.length; i++) {
       if (Array.isArray(extensiones[i])) {
@@ -148,20 +148,20 @@ function loadExtensionResult(extensiones) {
   }
 
 
-function graficarDungExtensiones(nodos, edges){
-  
-  var nodosLocal = new vis.DataSet(nodos);
-  var edgesLocal = new vis.DataSet(edges);
-  var dataLocal = {
-    nodes: nodosLocal,
-    edges: edgesLocal
-  };
-  var options={};
-  dataForExtensions = dataLocal;
-  var extensionsNetwork = new vis.Network(document.getElementById("mynetworkDeLPExtensions"), dataForExtensions, options);
-}
+  function graficarDungExtensiones(nodos, edges) {
 
-function showPleaseWait() {
+    var nodosLocal = new vis.DataSet(nodos);
+    var edgesLocal = new vis.DataSet(edges);
+    var dataLocal = {
+      nodes: nodosLocal,
+      edges: edgesLocal
+    };
+    var options = {};
+    dataForExtensions = dataLocal;
+    var extensionsNetwork = new vis.Network(document.getElementById("mynetworkDeLPExtensions"), dataForExtensions, options);
+  }
+
+  function showPleaseWait() {
     var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
         <div class="modal-dialog">\
             <div class="modal-content">\
@@ -180,12 +180,46 @@ function showPleaseWait() {
     </div>';
     $(document.body).append(modalLoading);
     $("#pleaseWaitDialog").modal("show");
-}
+  }
 
-/**
- * Hides "Please wait" overlay. See function showPleaseWait().
- */
-function hidePleaseWait() {
+  /**
+   * Hides "Please wait" overlay. See function showPleaseWait().
+   */
+  function hidePleaseWait() {
     $("#pleaseWaitDialog").modal("hide");
-}
+  }
+
+  $("#file").change(function() {
+    var content = new FileReader();
+    var file = this.files[0];
+    content.readAsText(file);
+
+    content.onload = function(event) {
+      var dungJson = JSON.parse(event.target.result);
+      if (dungJson.semantics) {
+        if (dungJson.arguments) {
+          if (dungJson.attacks) {
+            console.log("Ok json");
+            graficarJson(dungJson);
+
+          } else {
+            alert("bad json");
+          }
+        } else {
+          alert("bad json");
+        }
+      } else {
+        alert("bad json");
+      }
+
+    };
+  });
+
+function graficarJson(dungJson){
+  console.log("Arguments: " + dungJson.arguments);
+  console.log("Attacks: " + dungJson.attacks);
+  console.log("Semantics: " + dungJson.semantics);
+};
+
+
 });
