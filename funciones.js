@@ -196,7 +196,7 @@ $(document).ready(function() {
 
     content.onload = function(event) {
       var dungJson = JSON.parse(event.target.result);
-      if (dungJson.semantics) {
+      
         if (dungJson.arguments) {
           if (dungJson.attacks) {
             console.log("Ok json");
@@ -208,17 +208,43 @@ $(document).ready(function() {
         } else {
           alert("bad json");
         }
-      } else {
-        alert("bad json");
-      }
+      
 
     };
   });
 
 function graficarJson(dungJson){
+
+  
   console.log("Arguments: " + dungJson.arguments);
   console.log("Attacks: " + dungJson.attacks);
-  console.log("Semantics: " + dungJson.semantics);
+  
+
+  var container = document.getElementById('mynetworkDeLP');
+
+  var nodos = [];
+  var edgesLocal = [];
+  var aux;
+
+  $.each(dungJson.arguments, function(key, value){
+    nodos.push({
+      'id':value,
+      'label':value
+    });
+  });
+
+  $.each(dungJson.attacks, function(key, value){
+    aux = value.split(",");
+    edgesLocal.push({
+      'from':aux[0].charAt(1),
+      'to':aux[1].charAt(0),
+      'arrows':'to'
+    })
+  });
+
+  nodes.update(nodos);
+  edges.update(edgesLocal);
+
 };
 
 
