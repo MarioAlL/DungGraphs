@@ -252,8 +252,8 @@ try{
   $.each(dungJson.attacks, function(key, value){
     aux = value.split(",");
     edgesLocal.push({
-      'from':aux[0].charAt(1),
-      'to':aux[1].charAt(0),
+      'from':aux[0].substr(1, aux[0].length),
+      'to':aux[1].substr(0, aux[1].length - 1),
       'arrows':'to'
     })
   });

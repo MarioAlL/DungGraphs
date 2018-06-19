@@ -1,4 +1,4 @@
 {
-"arguments":["A","B","C","D"],
-"attacks":["(A,B)","(B,C)","(D,A)"]
+"arguments":["Abcd","Bee","Cd","D"],
+"attacks":["(Abcd,Bee)","(Bee,Cd)","(D,Abcd)"]
 }
