@@ -50,40 +50,50 @@
           <a class="navbar-brand" href="#">Dung's Graph</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+          <!--<ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             
-          </ul>
+          </ul>-->s
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <div class="container">
 
-      
+      <br>
+<div class="container" style="padding-top: 15px;">
+  <div class="form-group">
+    <label>Load the json file:</label>
+    <p>Format: {
+    "arguments":["Arg1", "Arg2", ...], 
+    "attacks":["(Arg1, Arg2)","(Arg2, Arg3)",...]}</p>
+    <input id="file" type="file" />
+    <p>or</p>
+    <label>use the <label id="showGT">graphical tool</label> to create the graph:</label>
+    <br></div>
+    
+  
 
+</div>
       
 
 <div class="container" style="padding-top: 15px;">
-  <div class="form-group">
-    <p>You can create the graph through the graphical tool or you can load a json with the data.</p>
+  <!--<div class="form-group">
     <label>Load the json file:</label><input id="file" type="file" />
-    <br></div>
-    <label for="comment">Dung Graph:</label><input type="text" id="nodeLabel" style="float: right; border-color: blue;"><label style="float: right;">Label of the argument: </label>
+    <br></div>-->
+    <div class="form-group" id="dungGraphArea">
+      <label for="comment">Dung Graph:</label><input type="text" id="nodeLabel" style="float: right; border-color: grey;"><label style="float: right;">Label of the argument: </label>
     <div id="mynetworkDeLP" style="background-color: #2C3439; height: 320px; border-radius: 5px;"></div>
     <label for="sel1">Select semantic:</label>
-  <select class="form-control" id="semantics">
+  <select class="form-control" id="semantics" disabled="true">
     <option value="grounded">grounded</option>
     <option value="preferred">preferred</option>
     <option value="stable">stable</option>
     <option value="semistable">semistable</option>
   </select>
-  
-
-</div>
-
-  
-<div class="form-group">
+    </div>
+    
+<div class="form-group" style="display: none;" id="extensions">
     <label for="comment">Extensions:</label>
     <div id="mynetworkDeLPExtensions" style="background-color: #2C3439; height: 350px; border-radius: 5px;"></div>
     <label for="sel1">Select extensions:</label>
@@ -91,6 +101,11 @@
     
   </select>
 </div>
+
+</div>
+
+  
+
 
 
 

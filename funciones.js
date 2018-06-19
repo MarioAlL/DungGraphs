@@ -29,7 +29,9 @@ $(document).ready(function() {
         callback(nodeData);
       },
       addEdge: function(edgeData, callback) {
+
         edgeData.arrows = "to";
+        $("#semantics").prop('disabled', false);
         callback(edgeData);
       }
     }
@@ -37,6 +39,7 @@ $(document).ready(function() {
 
   network = new vis.Network(container, data, options);
   dataForExtensions = data;
+
 
 
   $("#semantics").change(function() {
@@ -90,7 +93,9 @@ $(document).ready(function() {
         result = JSON.parse(data);
 
         loadExtensionResult(Object.values(result)[0]);
+        document.getElementById("extensions").style.display="block";
         hidePleaseWait();
+        
       },
       error: function(error) {
         alert("error: " + JSON.stringify(error));
@@ -191,10 +196,13 @@ $(document).ready(function() {
 
   $("#file").change(function() {
     var content = new FileReader();
-    var file = this.files[0];
-    content.readAsText(file);
-
-    content.onload = function(event) {
+    
+    
+   
+      var file = this.files[0];
+      
+      content.readAsText(file);
+      content.onload = function(event) {
       var dungJson = JSON.parse(event.target.result);
       
         if (dungJson.arguments) {
@@ -203,14 +211,22 @@ $(document).ready(function() {
             graficarJson(dungJson);
 
           } else {
-            alert("bad json");
+            alert("File error: no attacks specified");
           }
         } else {
-          alert("bad json");
+          alert("File error: no arguments specified");
         }
       
 
     };
+      
+      
+    
+    
+
+
+    
+    
   });
 
 function graficarJson(dungJson){
@@ -225,7 +241,7 @@ function graficarJson(dungJson){
   var nodos = [];
   var edgesLocal = [];
   var aux;
-
+try{
   $.each(dungJson.arguments, function(key, value){
     nodos.push({
       'id':value,
@@ -241,9 +257,15 @@ function graficarJson(dungJson){
       'arrows':'to'
     })
   });
+}catch(err){
+  alert("File error");
+}
+  
 
   nodes.update(nodos);
   edges.update(edgesLocal);
+  $("#semantics").prop('disabled', false);
+  
 
 };
 

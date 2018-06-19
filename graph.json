@@ -1,0 +1,4 @@
+{
+"arguments":["A","B","C","D"],
+"attacks":["(A,B)","(B,C)","(D,A)"]
+}
