@@ -1,0 +1,161 @@
+
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="icon" href="img/nuevolidia.jpg" type="image/ico">
+    <title>Abstract Argumentation Tool</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="loads/DataTables/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="loads/Vis/vis-network.min.css">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        input#file{
+            background: #ccc url('img/folder.svg') no-repeat top left;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="#">{Test!}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Get started</a>
+            </li>
+            <!--
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>-->
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <!--
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        </form>
+    </div>
+</nav>
+
+<main role="main">
+
+<div class="jumbotron" style="background-color: white;">
+    <div class="row">
+
+        <div id="containerOfDung" class="col-sm-12 col-md-12" >
+            <div>
+                <div id="divForJsonInput" class="form-group" style="border-left: 6px solid #0275d8; background-color: lightgrey; border-radius: 5px; padding-left: 5px;">
+
+                    <label><strong>Load a JSON file:</strong></label>
+                    <p>Format: {
+                        "arguments":["Arg1", "Arg2", ...],
+                        "attacks":["(Arg1, Arg2)","(Arg2, Arg3)",...]}</p>
+                    <p>Example: {
+                        "arguments":["A", "B", "C", "D", "E", "F"],
+                        "attacks":["(A,B)", "(A,C)", "(B,C)", "(E,D)", "(E,F)", "(F,A)", "(F,E)", "(A,E)"]}</p>
+                    <div class="image-upload">
+                            <label for="file">
+                                <img src="img/folder.svg" width="24" height="24"/>
+                                <label for="file">Load JSON</label>
+                            </label>
+                            <input id="file" type="file" style="display: none;"/>
+                    </div>
+                </div>
+                <div class="form-group" id="dungGraphArea">
+                    <label><strong>Dung Graph:</strong></label>
+
+                    <input type="text" id="nodeLabel" style="float: right; border-right: 6px solid #0275d8; border-radius: 5px; border-left-style: none; border-top-style: none; border-bottom: 1px solid lightgrey;">
+                    <label style="float: right;">Label of the argument: </label>
+                    <!--Old color for the networks = #2C3439-->
+
+                    <div id="mynetworkDeLP" style="background-color: white; border-right: 2px solid lightgrey;">
+
+                    </div>
+                    <label for="sel1">Select semantic:</label>
+                    <div style="float: right;">
+                        <label for="sel1">Select solver:</label>
+                        <input type="radio" name="solver" value="jArgSemSat" checked><label>jArgSemSat</label>
+                        <input type="radio" name="solver" value="ArgTech"><label>Arg-Tech</label>
+                    </div>
+                    <select class="form-control" id="semantics" disabled="true">
+                        <option value="grounded">grounded</option>
+                        <option value="preferred">preferred</option>
+                        <option value="stable">stable</option>
+                        <option value="semistable">semistable</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="containerOfExtensions" class="col-sm-6 col-md-6" style="display: none;">
+            <div class="container">
+                <div class="form-group" id="extensions">
+                    <label for="comment">Extensions:</label><input type="text" id="searchInExtension" style="float: right; border-right: 6px solid #0275d8; border-radius: 5px; border-left-style: none; border-top-style: none; border-bottom: 1px solid lightgrey;">
+                    <label style="float: right;">Search: </label>
+                    <!--Old color for the networks = #2C3439-->
+                    <div id="mynetworkDeLPExtensions" style="border-left: 2px solid lightgrey;"></div>
+                    <label for="sel1">Select extensions:</label>
+                    <select class="form-control" id="selectExtensionsResults"></select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</main>
+
+<footer class="container">
+
+</footer>
+<script src="loads/jquery-3.3.1.min.js"></script>
+<!--
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"><\/script>')</script>
+-->
+<script src="dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="loads/DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="loads/Vis/vis.js"></script>
+<script type="text/javascript" src="funciones.js"></script>
+</body>
+</html>

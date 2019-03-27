@@ -1,4 +1,0 @@
-{
-"arguments":["Abcd","Bee","Cd","D"],
-"attacks":["(Abcd,Bee)","(Bee,Cd)","(D,Abcd)"]
-}

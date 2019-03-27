@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  console.log("ready!");
+    document.getElementById("mynetworkDeLP").style.height = Math.round($(window).height() * 0.60) + 'px';
+    var exampleJSON = '{"arguments":["A","B","C","D","E","F"],"attacks":["(A,B)","(A,C)","(B,C)","(E,D)","(E,F)","(F,A)","(F,E)","(A,E)"]}';
 
   var network;
   var dataForExtensions;
@@ -39,11 +40,12 @@ $(document).ready(function() {
 
   network = new vis.Network(container, data, options);
   dataForExtensions = data;
-
+    graficarJson(JSON.parse(exampleJSON));
+    console.log("---> OK");
 
 
   $("#semantics").change(function() {
-    showPleaseWait();
+    //showPleaseWait();
     var jsonNodos = network.body.data.nodes._data;
     var jsonRelaciones = network.body.data.edges._data;
 
@@ -61,7 +63,7 @@ $(document).ready(function() {
       });
     });
 
-    console.log("Nodos: " + nodos);
+    //console.log("Nodos: " + nodos);
 
     $.each(jsonRelaciones, function(key, value) {
       ataques.push('(' + value.from + "," + value.to + ')');
@@ -72,9 +74,11 @@ $(document).ready(function() {
       });
     });
 
-    console.log("Ataques: " + ataques);
+    //console.log("Ataques: " + ataques);
 
     //Se grafica el dung donde se mostraran las extensiones
+    adaptarVistas(); //Para mostrar el div donde se dibuja las extensiones;
+      network.redraw();
     graficarDungExtensiones(dataNodos, dataEdges);
     $("#selectExtensionsResults").html('');
 
@@ -85,7 +89,8 @@ $(document).ready(function() {
       data: {
         arguments: nodos,
         attacks: ataques,
-        semantics: $(this).val()
+        semantics: $(this).val(),
+        solver: $("input[name='solver']:checked").val()
       },
       success: function(data) {
 
@@ -94,12 +99,12 @@ $(document).ready(function() {
 
         loadExtensionResult(Object.values(result)[0]);
         document.getElementById("extensions").style.display="block";
-        hidePleaseWait();
+        //hidePleaseWait();
         
       },
       error: function(error) {
         alert("error: " + JSON.stringify(error));
-        hidePleaseWait();
+        //hidePleaseWait();
       }
     });
 
@@ -109,10 +114,19 @@ $(document).ready(function() {
   $('#selectExtensionsResults').change(function() {
 
     var result = $(this).val();
-    console.log(result);
+    //console.log(result);
     cleanNetwork();
     extensiones(result);
   });
+
+  function adaptarVistas() {
+    $("#divForJsonInput").css("display", "none");
+    $("#containerOfDung").removeClass("col-sm-12 col-md-12");
+    $("#containerOfDung").addClass("col-sm-6 col-md-6");
+    $("#containerOfExtensions").css("display", "block");
+    document.getElementById("mynetworkDeLPExtensions").style.height = Math.round($(window).height() * 0.70) + 'px';
+      document.getElementById("mynetworkDeLP").style.height = Math.round($(window).height() * 0.70) + 'px';
+  }
 
   function cleanNetwork() {
 
@@ -167,7 +181,7 @@ $(document).ready(function() {
   }
 
   function showPleaseWait() {
-    var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
+    /*var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
         <div class="modal-dialog">\
             <div class="modal-content">\
                 <div class="modal-header">\
@@ -183,7 +197,7 @@ $(document).ready(function() {
             </div>\
         </div>\
     </div>';
-    $(document.body).append(modalLoading);
+    $(document.body).append(modalLoading);*/
     $("#pleaseWaitDialog").modal("show");
   }
 
@@ -207,7 +221,7 @@ $(document).ready(function() {
       
         if (dungJson.arguments) {
           if (dungJson.attacks) {
-            console.log("Ok json");
+            //console.log("Ok json");
             graficarJson(dungJson);
 
           } else {
@@ -232,8 +246,8 @@ $(document).ready(function() {
 function graficarJson(dungJson){
 
   
-  console.log("Arguments: " + dungJson.arguments);
-  console.log("Attacks: " + dungJson.attacks);
+  //console.log("Arguments: " + dungJson.arguments);
+  //console.log("Attacks: " + dungJson.attacks);
   
 
   var container = document.getElementById('mynetworkDeLP');
