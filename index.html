@@ -1,128 +1,115 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <!--<link rel="icon" href="bootstrap/favicon.ico">-->
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="icon" href="img/nuevolidia.jpg" type="image/ico">
+    <title>Abstract Argumentation Tool</title>
 
-    <title>Dung's Graph</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
     <!-- Custom styles for this template -->
-    <link href="bootstrap/starter-template.css" rel="stylesheet">
+    <link href="jumbotron.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="#">{Test!}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!--COMENTAR-->
-    <link rel="stylesheet" type="text/css" href="loads/DataTables/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="loads/Vis/vis-network.min.css">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="getStarted.html">Get started</a>
+            </li>
+            <!--
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>-->
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <!--
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        </form>
+    </div>
+</nav>
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="bootstrap/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+<main role="main">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Dung's Graph</a>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" style="background-image: url(img/stableFinal.png);">
+        <div class="container">
+            <h1 class="display-4"><strong>Abstract Argumentation Tool</strong></h1>
+            <p>This tool allow to construct an abstract argumentation framework and query for some of its semantics (stable, semistable, preferred and grounded). For the calculation of semantics you can use the jArgSemSat Solver [1] or the solver offered from Arg-tech web services.</p>
+            <p><a class="btn btn-primary btn-lg" href="getStarted.html" role="button">Get started &raquo;</a></p>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <!--<ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            
-          </ul>-->s
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    </div>
 
     <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>1- Create de AAF</h2>
+                <p>Create the abstract argumentation framework through the graphic tool or load it from a json file.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>2- Select semantic</h2>
+                <p>Select the semantics you want to calculate. The options are: Stable, Semistable, Preferred and Grounded.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>3- Semantics</h2>
+                <p>The arguments belonging to the different extensions will be painted green in another graph. You also have the option to show the different calculated extensions.</p>
+            </div>
+        </div>
 
-      <br>
-<div class="container" style="padding-top: 15px;">
-  <div class="form-group">
-    <label>Load the json file:</label>
-    <p>Format: {
-    "arguments":["Arg1", "Arg2", ...], 
-    "attacks":["(Arg1, Arg2)","(Arg2, Arg3)",...]}</p>
-    <input id="file" type="file" />
-    <p>or</p>
-    <label>use the <label id="showGT">graphical tool</label> to create the graph:</label>
-    <br></div>
-    
-  
+        <hr>
 
-</div>
-      
+    </div> <!-- /container -->
 
-<div class="container" style="padding-top: 15px;">
-  <!--<div class="form-group">
-    <label>Load the json file:</label><input id="file" type="file" />
-    <br></div>-->
-    <div class="form-group" id="dungGraphArea">
-      <label for="comment">Dung Graph:</label><input type="text" id="nodeLabel" style="float: right; border-color: grey;"><label style="float: right;">Label of the argument: </label>
-    <div id="mynetworkDeLP" style="background-color: #2C3439; height: 320px; border-radius: 5px;"></div>
-    <label for="sel1">Select semantic:</label>
-  <select class="form-control" id="semantics" disabled="true">
-    <option value="grounded">grounded</option>
-    <option value="preferred">preferred</option>
-    <option value="stable">stable</option>
-    <option value="semistable">semistable</option>
-  </select>
-    </div>
-    
-<div class="form-group" style="display: none;" id="extensions">
-    <label for="comment">Extensions:</label>
-    <div id="mynetworkDeLPExtensions" style="background-color: #2C3439; height: 350px; border-radius: 5px;"></div>
-    <label for="sel1">Select extensions:</label>
-  <select class="form-control" id="selectExtensionsResults">
-    
-  </select>
-</div>
+</main>
 
-</div>
-
-  
-
-
-
-
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="loads/jquery-3.3.1.min.js"></script>
-    <!--<script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="loads/DataTables/datatables.min.js"></script>
-    <script type="text/javascript" src="loads/Vis/vis.js"></script>
-    <script type="text/javascript" src="funciones.js"></script>
-    
-  </body>
+<footer class="container">
+    <p>[1] - Cerutti, F., Vallati, M., & Giacomin, M. (2016, March). jArgSemSAT: an efficient off-the-shelf solver for abstract argumentation frameworks. In Fifteenth International Conference on the Principles of Knowledge Representation and Reasoning.</p>
+    <p>&copy; Company 2017-2019</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"><\/script>')</script>
+<script src="dist/js/bootstrap.bundle.min.js"></script></body>
 </html>
